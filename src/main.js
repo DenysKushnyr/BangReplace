@@ -4,11 +4,13 @@ const BANGS = {
     "!r": "site:reddit.com",
     "!gh": "site:github.com",
     "!pdf": "filetype:pdf",
-    "!docx": "filetype:docx",
     "!doc": "filetype:doc",
+    "!docx": "filetype:docx",
     
     ...Object.fromEntries(timeKeys.map(k => [k, ""]))
 }
+
+
 
 const keys = Object.keys(BANGS).sort((a, b) => b.length - a.length)
 const maxLength = keys[0].length + keys[1].length;
@@ -19,6 +21,7 @@ const HOST_PERMISSIONS = [
     "*://*.duckduckgo.com/*",
     "*://*.brave.com/*"
 ]
+
 
 chrome.webRequest.onBeforeRequest.addListener(
     webRequestHandler,
