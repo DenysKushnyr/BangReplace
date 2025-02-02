@@ -52,9 +52,7 @@ async function webRequestHandler(r) {
             if (url.host === "www.google.com") {
 		if (timeKeys.indexOf(key) !== -1) {
                     url.searchParams.set("tbs", `qdr:${key[1]}`);
-		}
-
-		if (countryKeys.indexOf(key) !== -1) {
+		} else if (countryKeys.indexOf(key) !== -1) {
 		    url.searchParams.set("cr", `country${key.substring(1).toUpperCase()}`);
 		}
             }
