@@ -1,4 +1,5 @@
 const timeKeys = ["!y", "!m", "!w", "!d"]; // ONLY  for google
+const countryKeys = ["!us"]; // ONLY for google
 
 const BANGS = {
     "!r": "site:reddit.com",
@@ -7,7 +8,8 @@ const BANGS = {
     "!doc": "filetype:doc",
     "!docx": "filetype:docx",
     
-    ...Object.fromEntries(timeKeys.map(k => [k, ""]))
+    ...Object.fromEntries(timeKeys.map(k => [k, ""])),
+    ...Object.fromEntries(countryKeys.map(k => [k, ""])),
 }
 
 
@@ -47,9 +49,17 @@ async function webRequestHandler(r) {
                 url.searchParams.set("oq", newQuery);
             }
 
-            if (url.host === "www.google.com" && timeKeys.indexOf(key) !== -1) {
-                url.searchParams.set("tbs", `qdr:${key[1]}`);
+            if (url.host === "www.google.com") {
+		if (timeKeys.indexOf(key) !== -1) {
+                    url.searchParams.set("tbs", `qdr:${key[1]}`);
+		}
+
+		if (countryKeys.indexOf(key) !== -1) {
+		    url.searchParams.set("cr", `country${key.substring(1).toUpperCase()}`);
+		}
             }
+
+	    
 
             await chrome.tabs.update(r.tabId, { url: url.toString() });
         }
