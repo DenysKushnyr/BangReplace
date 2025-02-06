@@ -1,6 +1,7 @@
 const timeKeys = ["!y", "!m", "!w", "!d"]; // ONLY  for google
 const countries = { // ONLY for google
     "!us": "en", // lang
+    "!ua": "uk",
 }; 
 
 const BANGS = {
