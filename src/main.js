@@ -38,7 +38,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 async function webRequestHandler(r) {
     const url = new URL(r.url);
-    const query = url.searchParams.get("q");
+    let query = url.searchParams.get("q");
 
     if (!query)
         return;
@@ -46,6 +46,7 @@ async function webRequestHandler(r) {
     for (const key of keys) {
         if (query.indexOf(key, query.length - maxLength) !== -1) {
             const newQuery = query.replace(key, countryKeys.includes(key) ? "" : BANGS[key]);
+            query = newQuery;
 
             url.searchParams.set("q", newQuery);
             if (url.searchParams.get("oq")) {
