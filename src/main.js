@@ -8,6 +8,7 @@ const countries = { // ONLY for google { "countryCode": "langCode" }
 const BANGS = {
     "!r": "site:reddit.com",
     "!gh": "site:github.com",
+    "!habr": "site:habr.com",
     "!pdf": "filetype:pdf",
     "!doc": "filetype:doc",
     "!docx": "filetype:docx",
